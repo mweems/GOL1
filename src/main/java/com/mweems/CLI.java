@@ -22,5 +22,6 @@ public class CLI implements UserInterface {
         String numIterations = prompter.promptForNumIterations();
         int iterations = stringParser.parseIterations(numIterations);
         grid.populate(points);
+        String gridCellsAsString = stringParser.parseGrid(grid);
     }
 }

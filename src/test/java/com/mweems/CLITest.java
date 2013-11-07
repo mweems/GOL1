@@ -77,4 +77,13 @@ public class CLITest {
        //Assert
        verify(mockStringParser).parseIterations("user input num iterations");
     }
+
+    @Test
+    public void reportsAsStringToUser() {
+        //Act
+        cli.run();
+
+        //Assert
+        verify(mockStringParser).parseGrid(mockGrid);
+    }
 }

@@ -8,4 +8,6 @@ public interface StringParser {
     ArrayList<Point> parseCellLocations(String cellLocations);
 
     int parseIterations(String numIterations);
+
+    String parseGrid(Grid grid);
 }
