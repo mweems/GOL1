@@ -11,6 +11,7 @@ public class CLITest {
     private Prompter mockPrompter;
     private StringParser mockStringParser;
     private Grid mockGrid;
+    private Outputter mockOutputter;
     private CLI cli;
 
     @Before
@@ -18,7 +19,8 @@ public class CLITest {
         mockPrompter = mock(Prompter.class);
         mockStringParser = mock(StringParser.class);
         mockGrid = mock(Grid.class);
-        cli = new CLI(mockPrompter, mockStringParser, mockGrid);
+        mockOutputter = mock(Outputter.class);
+        cli = new CLI(mockPrompter, mockStringParser, mockGrid, mockOutputter);
     }
 
     @Test
@@ -27,13 +29,13 @@ public class CLITest {
         cli.run();
 
         //Assert
-        verify(mockPrompter).promptForCellLocations();
+        verify(mockPrompter, atLeastOnce()).prompt();
     }
 
     @Test
     public void parsesCellInitializationString() {
         //Arrange
-        stub(mockPrompter.promptForCellLocations()).toReturn("user input cell locations");
+        stub(mockPrompter.prompt()).toReturn("user input cell locations");
 
         //Act
         cli.run();
@@ -63,13 +65,13 @@ public class CLITest {
         cli.run();
 
         //Assert
-        verify(mockPrompter).promptForNumIterations();
+        verify(mockPrompter, atLeastOnce()).prompt();
     }
 
     @Test
     public void parsesNumIterations() {
         //Arrange
-        stub(mockPrompter.promptForNumIterations()).toReturn("user input num iterations");
+        stub(mockPrompter.prompt()).toReturn("user input num iterations");
 
         //Act
         cli.run();
@@ -79,11 +81,23 @@ public class CLITest {
     }
 
     @Test
-    public void reportsAsStringToUser() {
+    public void parsesGridToString() {
         //Act
         cli.run();
 
         //Assert
         verify(mockStringParser).parseGrid(mockGrid);
+    }
+
+    @Test
+    public void reportsAsStringToUser() {
+        //Arrange
+        stub(mockStringParser.parseGrid(mockGrid)).toReturn("string of cell locations");
+
+        //Act
+        cli.run();
+
+        //Assert
+        verify(mockOutputter).output("string of cell locations");
     }
 }
