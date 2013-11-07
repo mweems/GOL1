@@ -48,4 +48,18 @@ public class StringParserIMPLTest {
         assertEquals(1, cellLocationsAsPoints.get(0).getX(), 0);
         assertEquals(2, cellLocationsAsPoints.get(0).getY(), 0);
     }
+
+    @Test
+    public void convertIterationStringIntoInteger() {
+        //Arrange
+        ArrayList<Integer> cellLocationsAsIntegers = new ArrayList<Integer>();
+        cellLocationsAsIntegers.add(1);
+        stub(mockSTI.intValueOf(anyString())).toReturn(cellLocationsAsIntegers);
+
+        //Act
+        int numIterations = stringParser.parseIterations("1");
+
+        //Assert
+        assertEquals(1,numIterations);
+    }
 }
