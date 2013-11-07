@@ -2,6 +2,7 @@ package com.mweems;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,13 +13,13 @@ import static org.mockito.Mockito.*;
 @SuppressWarnings("ALL")
 public class StringParserIMPLTest {
 
-    private StringToInt mockSTI;
+    private ToInt mockToInt;
     private StringParserIMPL stringParser;
 
     @Before
     public void setup() {
-        mockSTI = mock(StringToInt.class);
-        stringParser = new StringParserIMPL(mockSTI);
+        mockToInt = mock(ToInt.class);
+        stringParser = new StringParserIMPL(mockToInt);
 
     }
 
@@ -28,7 +29,7 @@ public class StringParserIMPLTest {
         stringParser.parseCellLocations("cell locations as string");
 
         //Assert
-        verify(mockSTI).intValueOf("cell locations as string");
+        verify(mockToInt).intValueOfString("cell locations as string");
     }
 
     @Test
@@ -37,7 +38,7 @@ public class StringParserIMPLTest {
         ArrayList<Integer> cellLocationsAsIntegers = new ArrayList<Integer>();
         cellLocationsAsIntegers.add(1);
         cellLocationsAsIntegers.add(2);
-        stub(mockSTI.intValueOf(anyString())).toReturn(cellLocationsAsIntegers);
+        stub(mockToInt.intValueOfString(anyString())).toReturn(cellLocationsAsIntegers);
 
         //Act
         ArrayList<Point> cellLocationsAsPoints = stringParser.parseCellLocations("1,2");
@@ -54,12 +55,41 @@ public class StringParserIMPLTest {
         //Arrange
         ArrayList<Integer> cellLocationsAsIntegers = new ArrayList<Integer>();
         cellLocationsAsIntegers.add(1);
-        stub(mockSTI.intValueOf(anyString())).toReturn(cellLocationsAsIntegers);
+        stub(mockToInt.intValueOfString(anyString())).toReturn(cellLocationsAsIntegers);
 
         //Act
         int numIterations = stringParser.parseIterations("1");
 
         //Assert
         assertEquals(1,numIterations);
+    }
+
+    @Test
+    public void convertGridCallsToInt() {
+        //Arrange
+        Grid mockGrid = mock(Grid.class);
+
+        //Act
+        stringParser.parseGrid(mockGrid);
+
+        //Assert
+        verify(mockToInt).intValueOfGrid(mockGrid);
+
+    }
+
+    @Test
+    public void convertGridObjectIntoString() {
+        //Arrange
+        Grid mockGrid = mock(Grid.class);
+        ArrayList<Integer> cellLocationsAsIntegers = new ArrayList<Integer>();
+        cellLocationsAsIntegers.add(1);
+        cellLocationsAsIntegers.add(2);
+        stub(mockToInt.intValueOfGrid(Matchers.<Grid>any())).toReturn(cellLocationsAsIntegers);
+
+        //Act
+        String cellLocationsAsString = stringParser.parseGrid(mockGrid);
+
+        //Assert
+        assertEquals(2,cellLocationsAsString.length());
     }
 }

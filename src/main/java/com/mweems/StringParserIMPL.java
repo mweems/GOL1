@@ -5,27 +5,36 @@ import java.util.ArrayList;
 
 public class StringParserIMPL implements StringParser {
 
-    private StringToInt sti;
+    private ToInt ti;
 
-    public StringParserIMPL(StringToInt sti) {
-        this.sti = sti;
+    public StringParserIMPL(ToInt sti) {
+        this.ti = sti;
     }
 
     @Override
     public ArrayList<Point> parseCellLocations(String cellLocations) {
-        ArrayList<Integer> cellLocationsAsIntegers = sti.intValueOf(cellLocations);
+        ArrayList<Integer> cellLocationsAsIntegers = ti.intValueOfString(cellLocations);
         return intToPoints(cellLocationsAsIntegers);
     }
 
     @Override
     public int parseIterations(String numIterations) {
-        ArrayList<Integer> numIterationsAsInteger = sti.intValueOf(numIterations);
+        ArrayList<Integer> numIterationsAsInteger = ti.intValueOfString(numIterations);
         return numIterationsAsInteger.get(0);
     }
 
     @Override
     public String parseGrid(Grid grid) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        ArrayList<Integer> cellLocationsAsIntegers = ti.intValueOfGrid(grid);
+        return intToString(cellLocationsAsIntegers);
+    }
+
+    private String intToString(ArrayList<Integer> cellLocationsAsIntegers) {
+        String cellLocationsAsString = "";
+        for(Integer value : cellLocationsAsIntegers){
+            cellLocationsAsString += value.toString();
+        }
+        return cellLocationsAsString;
     }
 
     private ArrayList<Point> intToPoints(ArrayList<Integer> cellLocationsAsIntegers) {
