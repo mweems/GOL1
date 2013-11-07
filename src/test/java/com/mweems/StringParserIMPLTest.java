@@ -5,10 +5,8 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 @SuppressWarnings("ALL")
@@ -36,8 +34,9 @@ public class StringParserIMPLTest {
     @Test
     public void convertIntegersToPoints() {
         //Arrange
-        HashMap<Integer, Integer> cellLocationsAsIntegers = new HashMap<Integer, Integer>();
-        cellLocationsAsIntegers.put(1,2);
+        ArrayList<Integer> cellLocationsAsIntegers = new ArrayList<Integer>();
+        cellLocationsAsIntegers.add(1);
+        cellLocationsAsIntegers.add(2);
         stub(mockSTI.intValueOf(anyString())).toReturn(cellLocationsAsIntegers);
 
         //Act

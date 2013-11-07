@@ -1,8 +1,8 @@
 package com.mweems;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public interface StringToInt {
 
-    HashMap<Integer, Integer> intValueOf(String inputString);
+    ArrayList<Integer> intValueOf(String inputString);
 }

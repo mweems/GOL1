@@ -2,8 +2,6 @@ package com.mweems;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class StringParserIMPL implements StringParser {
 
@@ -15,14 +13,14 @@ public class StringParserIMPL implements StringParser {
 
     @Override
     public ArrayList<Point> parseCellLocations(String cellLocations) {
-        HashMap<Integer, Integer> cellLocationsAsIntegers = sti.intValueOf(cellLocations);
+        ArrayList<Integer> cellLocationsAsIntegers = sti.intValueOf(cellLocations);
         return intToPoints(cellLocationsAsIntegers);
     }
 
-    private ArrayList<Point> intToPoints(HashMap<Integer, Integer> cellLocationsAsIntegers) {
+    private ArrayList<Point> intToPoints(ArrayList<Integer> cellLocationsAsIntegers) {
         ArrayList<Point> cellLocationsAsPoints = new ArrayList<Point>();
-        for(Map.Entry<Integer, Integer> cellLocation : cellLocationsAsIntegers.entrySet()){
-            cellLocationsAsPoints.add(new Point(cellLocation.getKey(),cellLocation.getValue()));
+        for(int i = 0; i < cellLocationsAsIntegers.size(); i = i + 2){
+            cellLocationsAsPoints.add(new Point(cellLocationsAsIntegers.get(i),cellLocationsAsIntegers.get(i +1)));
         }
         return cellLocationsAsPoints;
     }
