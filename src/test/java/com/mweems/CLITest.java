@@ -33,13 +33,13 @@ public class CLITest {
     @Test
     public void parsesCellInitializationString() {
         //Arrange
-        stub(mockPrompter.promptForCellLocations()).toReturn("user input string");
+        stub(mockPrompter.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
         cli.run();
 
         //Assert
-        verify(mockStringParser).parse("user input string");
+        verify(mockStringParser).parseCellLocations("user input cell locations");
     }
 
     @Test
@@ -48,12 +48,33 @@ public class CLITest {
         ArrayList<Point> points = new ArrayList<Point>();
         points.add(new Point(1,2));
 
-        stub(mockStringParser.parse(anyString())).toReturn(points);
+        stub(mockStringParser.parseCellLocations(anyString())).toReturn(points);
 
         //Act
         cli.run();
 
         //Assert
         verify(mockGrid).populate(points);
+    }
+
+    @Test
+    public void promptsForNumIterations() {
+        //Act
+        cli.run();
+
+        //Assert
+        verify(mockPrompter).promptForNumIterations();
+    }
+
+    @Test
+    public void parsesNumIterations() {
+        //Arrange
+        stub(mockPrompter.promptForNumIterations()).toReturn("user input num iterations");
+
+        //Act
+        cli.run();
+
+       //Assert
+       verify(mockStringParser).parseIterations("user input num iterations");
     }
 }

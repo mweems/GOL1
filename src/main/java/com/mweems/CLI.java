@@ -18,7 +18,9 @@ public class CLI implements UserInterface {
     @Override
     public void run() {
         String userInput = prompter.promptForCellLocations();
-        ArrayList<Point> points = stringParser.parse(userInput);
+        ArrayList<Point> points = stringParser.parseCellLocations(userInput);
+        String numIterations = prompter.promptForNumIterations();
+        int iterations = stringParser.parseIterations(numIterations);
         grid.populate(points);
     }
 }

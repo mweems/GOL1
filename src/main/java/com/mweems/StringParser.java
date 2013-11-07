@@ -5,5 +5,7 @@ import java.util.ArrayList;
 
 public interface StringParser {
 
-    ArrayList<Point> parse(String input);
+    ArrayList<Point> parseCellLocations(String cellLocations);
+
+    int parseIterations(String numIterations);
 }
