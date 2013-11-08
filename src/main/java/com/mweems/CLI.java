@@ -4,21 +4,22 @@ import java.util.ArrayList;
 
 public class CLI implements UserInterface {
 
-    private Prompter prompter;
-    private StringParser stringParser;
+    private UserInteractions userInteractions;
+    private Parser parser;
     private Grid grid;
 
-    public CLI(Prompter prompter, StringParser stringParser, Grid grid) {
-        this.prompter = prompter;
-        this.stringParser = stringParser;
+    public CLI(UserInteractions userInteractions, Parser parser, Grid grid) {
+        this.userInteractions = userInteractions;
+        this.parser = parser;
         this.grid = grid;
     }
 
     @Override
     public void run() {
-        String userInput = prompter.promptForCellLocations();
-        ArrayList<Cell> cells = stringParser.parseCellLocations(userInput);
+        String userInput = userInteractions.promptForCellLocations();
+        ArrayList<Cell> cells = parser.parseCellLocations(userInput);
         grid.populate(cells);
-        String gridCellsAsString = stringParser.parseGrid(grid);
+        String gridCellsAsString = parser.parseGrid(grid);
+        userInteractions.displayOutPut(gridCellsAsString);
     }
 }

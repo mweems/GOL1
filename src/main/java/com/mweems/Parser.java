@@ -2,7 +2,7 @@ package com.mweems;
 
 import java.util.ArrayList;
 
-public interface StringParser {
+public interface Parser {
 
     ArrayList<Cell> parseCellLocations(String cellLocations);
 
