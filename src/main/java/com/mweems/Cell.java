@@ -2,8 +2,19 @@ package com.mweems;
 
 public class Cell {
 
+    private int xLoc;
+    private int yLoc;
 
     public Cell(int xLoc, int yLoc) {
-        //To change body of created methods use File | Settings | File Templates.
+        this.xLoc = xLoc;
+        this.yLoc = yLoc;
+    }
+
+    public int getXLoc() {
+        return xLoc;
+    }
+
+    public int getYLoc() {
+        return yLoc;
     }
 }

@@ -13,6 +13,7 @@ public class CLITest {
     private Parser mockParser;
     private Grid mockGrid;
     private CLI cli;
+    private Cell mockCell;
 
     @Before
     public void setup() {
@@ -20,6 +21,7 @@ public class CLITest {
         mockParser = mock(Parser.class);
         mockGrid = mock(Grid.class);
         cli = new CLI(mockUserInteractions, mockParser, mockGrid);
+        mockCell = mock(Cell.class);
     }
 
     @Test
@@ -47,7 +49,7 @@ public class CLITest {
     public void populatesGridWithCells() {
         //Arrange
         ArrayList<Cell> cells = new ArrayList<Cell>();
-        cells.add(new Cell(1, 2));
+        cells.add(mockCell);
 
         stub(mockParser.parseCellLocations(anyString())).toReturn(cells);
 
