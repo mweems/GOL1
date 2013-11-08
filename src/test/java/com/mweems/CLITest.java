@@ -11,7 +11,6 @@ public class CLITest {
     private Prompter mockPrompter;
     private StringParser mockStringParser;
     private Grid mockGrid;
-    private Outputter mockOutputter;
     private CLI cli;
 
     @Before
@@ -19,8 +18,7 @@ public class CLITest {
         mockPrompter = mock(Prompter.class);
         mockStringParser = mock(StringParser.class);
         mockGrid = mock(Grid.class);
-        mockOutputter = mock(Outputter.class);
-        cli = new CLI(mockPrompter, mockStringParser, mockGrid, mockOutputter);
+        cli = new CLI(mockPrompter, mockStringParser, mockGrid);
     }
 
     @Test
@@ -60,27 +58,6 @@ public class CLITest {
     }
 
     @Test
-    public void promptsForNumIterations() {
-        //Act
-        cli.run();
-
-        //Assert
-        verify(mockPrompter, atLeastOnce()).prompt();
-    }
-
-    @Test
-    public void parsesNumIterations() {
-        //Arrange
-        stub(mockPrompter.prompt()).toReturn("user input num iterations");
-
-        //Act
-        cli.run();
-
-       //Assert
-       verify(mockStringParser).parseIterations("user input num iterations");
-    }
-
-    @Test
     public void parsesGridToString() {
         //Act
         cli.run();
@@ -89,15 +66,4 @@ public class CLITest {
         verify(mockStringParser).parseGrid(mockGrid);
     }
 
-    @Test
-    public void reportsAsStringToUser() {
-        //Arrange
-        stub(mockStringParser.parseGrid(mockGrid)).toReturn("string of cell locations");
-
-        //Act
-        cli.run();
-
-        //Assert
-        verify(mockOutputter).output("string of cell locations");
-    }
 }
