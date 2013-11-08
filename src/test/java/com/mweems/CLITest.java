@@ -8,17 +8,17 @@ import static org.mockito.Mockito.*;
 
 public class CLITest {
 
-    private Prompter mockPrompter;
-    private StringParser mockStringParser;
+    private UserInteraction mockUserInteraction;
+    private Parser mockParser;
     private Grid mockGrid;
     private CLI cli;
 
     @Before
     public void setup() {
-        mockPrompter = mock(Prompter.class);
-        mockStringParser = mock(StringParser.class);
+        mockUserInteraction = mock(UserInteraction.class);
+        mockParser = mock(Parser.class);
         mockGrid = mock(Grid.class);
-        cli = new CLI(mockPrompter, mockStringParser, mockGrid);
+        cli = new CLI(mockUserInteraction, mockParser, mockGrid);
     }
 
     @Test
@@ -27,19 +27,19 @@ public class CLITest {
         cli.run();
 
         //Assert
-        verify(mockPrompter).promptForCellLocations();
+        verify(mockUserInteraction).promptForCellLocations();
     }
 
     @Test
     public void parsesCellInitializationString() {
         //Arrange
-        stub(mockPrompter.promptForCellLocations()).toReturn("user input string");
+        stub(mockUserInteraction.promptForCellLocations()).toReturn("user input string");
 
         //Act
         cli.run();
 
         //Assert
-        verify(mockStringParser).parse("user input string");
+        verify(mockParser).parseString("user input string");
     }
 
     @Test
@@ -48,12 +48,34 @@ public class CLITest {
         ArrayList<Point> points = new ArrayList<Point>();
         points.add(new Point(1,2));
 
-        stub(mockStringParser.parse(anyString())).toReturn(points);
+        stub(mockParser.parseString(anyString())).toReturn(points);
 
         //Act
         cli.run();
 
         //Assert
         verify(mockGrid).populate(points);
+    }
+
+    @Test
+    public void parseGridToString() {
+        //Act
+        cli.run();
+
+        //Assert
+        verify(mockParser).parseGrid(mockGrid);
+    }
+
+    @Test
+    public void passStringOfCellLocationsToUserInteractions() {
+        //Arrange
+        stub(mockParser.parseGrid(mockGrid)).toReturn("grid as string");
+
+        //Act
+        cli.run();
+
+        //Assert
+        verify(mockUserInteraction).displayOutput("grid as string");
+
     }
 }

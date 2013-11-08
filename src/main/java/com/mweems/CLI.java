@@ -5,20 +5,22 @@ import java.util.ArrayList;
 
 public class CLI implements UserInterface {
 
-    private Prompter prompter;
-    private StringParser stringParser;
+    private UserInteraction userInteraction;
+    private Parser parser;
     private Grid grid;
 
-    public CLI(Prompter prompter, StringParser stringParser, Grid grid) {
-        this.prompter = prompter;
-        this.stringParser = stringParser;
+    public CLI(UserInteraction userInteraction, Parser parser, Grid grid) {
+        this.userInteraction = userInteraction;
+        this.parser = parser;
         this.grid = grid;
     }
 
     @Override
     public void run() {
-        String userInput = prompter.promptForCellLocations();
-        ArrayList<Point> points = stringParser.parse(userInput);
+        String userInput = userInteraction.promptForCellLocations();
+        ArrayList<Point> points = parser.parseString(userInput);
         grid.populate(points);
+        String cellLocationsAsString = parser.parseGrid(grid);
+        userInteraction.displayOutput(cellLocationsAsString);
     }
 }
