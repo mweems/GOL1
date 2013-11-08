@@ -2,8 +2,9 @@ package com.mweems;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.awt.*;
+
 import java.util.ArrayList;
+
 import static org.mockito.Mockito.*;
 
 public class CLITest {
@@ -27,13 +28,13 @@ public class CLITest {
         cli.run();
 
         //Assert
-        verify(mockPrompter, atLeastOnce()).prompt();
+        verify(mockPrompter).promptForCellLocations();
     }
 
     @Test
     public void parsesCellInitializationString() {
         //Arrange
-        stub(mockPrompter.prompt()).toReturn("user input cell locations");
+        stub(mockPrompter.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
         cli.run();
@@ -45,16 +46,16 @@ public class CLITest {
     @Test
     public void populatesGridWithCells() {
         //Arrange
-        ArrayList<Point> points = new ArrayList<Point>();
-        points.add(new Point(1,2));
+        ArrayList<Cell> cells = new ArrayList<Cell>();
+        cells.add(new Cell(1, 2));
 
-        stub(mockStringParser.parseCellLocations(anyString())).toReturn(points);
+        stub(mockStringParser.parseCellLocations(anyString())).toReturn(cells);
 
         //Act
         cli.run();
 
         //Assert
-        verify(mockGrid).populate(points);
+        verify(mockGrid).populate(cells);
     }
 
     @Test

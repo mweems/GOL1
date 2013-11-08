@@ -1,6 +1,5 @@
 package com.mweems;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class CLI implements UserInterface {
@@ -17,12 +16,9 @@ public class CLI implements UserInterface {
 
     @Override
     public void run() {
-        ArrayList<Point> points = stringParser.parseCellLocations(prompt());
-        grid.populate(points);
+        String userInput = prompter.promptForCellLocations();
+        ArrayList<Cell> cells = stringParser.parseCellLocations(userInput);
+        grid.populate(cells);
         String gridCellsAsString = stringParser.parseGrid(grid);
-    }
-
-    private String prompt() {
-        return prompter.prompt();
     }
 }
