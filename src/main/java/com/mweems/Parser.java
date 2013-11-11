@@ -1,10 +1,10 @@
 package com.mweems;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Parser {
 
-    ArrayList<Cell> parseCellLocations(String cellLocations);
+    List<Cell> parseCellLocations(String cellLocations);
 
     String parseGrid(Grid grid);
 }

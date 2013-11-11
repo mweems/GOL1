@@ -1,12 +1,13 @@
 package com.mweems;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DefaultParser implements Parser{
 
     @Override
-    public ArrayList<Cell> parseCellLocations(String cellLocations) {
-        ArrayList<Cell> cells = new ArrayList<Cell>();
+    public List<Cell> parseCellLocations(String cellLocations) {
+        List<Cell> cells = new ArrayList<Cell>();
         String[] cellLocationsPaired = cellLocations.split(" ");
         for(String cellPairs : cellLocationsPaired){
             String[] cellLocationsSplit = cellPairs.split(",");
@@ -19,6 +20,12 @@ public class DefaultParser implements Parser{
 
     @Override
     public String parseGrid(Grid grid) {
-        return null;  //not implemented yet
+        String cellLocationsAsString = "";
+        List<Cell> cells;
+        cells = grid.getCells();
+        for(Cell cell : cells){
+            cellLocationsAsString += cell.toString();
+        }
+        return cellLocationsAsString;
     }
 }

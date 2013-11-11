@@ -3,18 +3,18 @@ package com.mweems;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class DefaultParserTest {
 
+    DefaultParser parser = new DefaultParser();
+
     @Test
     public void parseStringArrayOfCells() {
-        //Arrange
-        DefaultParser parser = new DefaultParser();
-
         //Act
-        ArrayList<Cell> cells = parser.parseCellLocations("1,2 3,4 5,6");
+        List<Cell> cells = parser.parseCellLocations("1,2 3,4 5,6");
 
         //Assert
         assertEquals(3, cells.size());
@@ -23,4 +23,20 @@ public class DefaultParserTest {
         assertEquals(6, cells.get(2).getYLoc());
 
     }
+
+    @Test
+    public void parseGridToString(){
+        //Arrange
+        List<Cell> cells = new ArrayList<Cell>();
+        cells.add(new Cell(1,2));
+        Grid grid = new DefaultGrid();
+
+        //Act
+        grid.populate(cells);
+        String gridAsString = parser.parseGrid(grid);
+
+        //Assert
+        assertEquals("1,2", gridAsString);
+    }
+
 }
