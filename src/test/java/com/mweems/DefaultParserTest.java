@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class DefaultParserTest {
 
@@ -14,13 +15,14 @@ public class DefaultParserTest {
     @Test
     public void parseStringArrayOfCells() {
         //Act
-        List<Cell> cells = parser.parseCellLocations("1,2 3,4 5,6");
+        List<Cell> cells = parser.parseCellLocations("1,2 3,4");
 
         //Assert
-        assertEquals(3, cells.size());
+        assertEquals(2, cells.size());
         assertEquals(1, cells.get(0).getXLoc());
         assertEquals(2, cells.get(0).getYLoc());
-        assertEquals(6, cells.get(2).getYLoc());
+        assertEquals(3, cells.get(1).getXLoc());
+        assertEquals(4, cells.get(1).getYLoc());
 
     }
 
@@ -29,14 +31,15 @@ public class DefaultParserTest {
         //Arrange
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(new Cell(1,2));
-        Grid grid = new DefaultGrid();
+        cells.add(new Cell(3,4));
+        Grid mockGrid = mock(Grid.class);
+        stub(mockGrid.getCells()).toReturn(cells);
 
         //Act
-        grid.populate(cells);
-        String gridAsString = parser.parseGrid(grid);
+        String gridAsString = parser.parseGrid(mockGrid);
 
         //Assert
-        assertEquals("1,2", gridAsString);
+        assertEquals("1,2 3,4", gridAsString);
     }
 
 }
