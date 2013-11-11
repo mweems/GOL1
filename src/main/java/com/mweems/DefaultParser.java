@@ -17,15 +17,4 @@ public class DefaultParser implements Parser{
         }
         return cells;
     }
-
-    @Override
-    public String parseGrid(Grid grid) {
-        String cellLocationsAsString = "";
-        List<Cell> cells = grid.getCells();
-        for(Cell cell : cells){
-            cellLocationsAsString += cell.toString();
-            if(!cell.equals(cells.get(cells.size()-1))) cellLocationsAsString += " ";
-        }
-        return cellLocationsAsString;
-    }
 }

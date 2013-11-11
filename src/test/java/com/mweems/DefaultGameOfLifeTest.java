@@ -61,18 +61,9 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void parsesGridToString() {
-        //Act
-        defaultGameOfLife.run();
-
-        //Assert
-        verify(mockParser).parseGrid(mockGrid);
-    }
-
-    @Test
     public void passStringToUserInteractionsForDisplayToUser() {
         //Arrange
-        stub(mockParser.parseGrid(mockGrid)).toReturn("grid as string");
+        stub(mockGrid.toString()).toReturn("grid as string");
 
         //Act
         defaultGameOfLife.run();

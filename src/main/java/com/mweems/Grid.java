@@ -7,4 +7,7 @@ public interface Grid {
     void populate(List<Cell> cells);
 
     List<Cell> getCells();
+
+    String toString();
+
 }
