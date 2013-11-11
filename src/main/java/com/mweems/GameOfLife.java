@@ -1,8 +1,6 @@
 package com.mweems;
 
-public class GameOfLife {
+public interface GameOfLife {
 
-    public static void main(String[] args) {
-
-    }
+    public void run();
 }

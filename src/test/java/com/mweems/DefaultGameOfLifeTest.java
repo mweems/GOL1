@@ -7,39 +7,39 @@ import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 
-public class CLITest {
+public class DefaultGameOfLifeTest {
 
-    private UserInteractions mockUserInteractions;
+    private CLI mockCLI;
     private Parser mockParser;
     private Grid mockGrid;
-    private CLI cli;
+    private DefaultGameOfLife defaultGameOfLife;
     private Cell mockCell;
 
     @Before
     public void setup() {
-        mockUserInteractions = mock(UserInteractions.class);
+        mockCLI = mock(CLI.class);
         mockParser = mock(Parser.class);
         mockGrid = mock(Grid.class);
-        cli = new CLI(mockUserInteractions, mockParser, mockGrid);
+        defaultGameOfLife = new DefaultGameOfLife(mockCLI, mockParser, mockGrid);
         mockCell = mock(Cell.class);
     }
 
     @Test
     public void promptsForCellInitializationString() {
         //Act
-        cli.run();
+        defaultGameOfLife.run();
 
         //Assert
-        verify(mockUserInteractions).promptForCellLocations();
+        verify(mockCLI).promptForCellLocations();
     }
 
     @Test
     public void parsesCellInitializationString() {
         //Arrange
-        stub(mockUserInteractions.promptForCellLocations()).toReturn("user input cell locations");
+        stub(mockCLI.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
-        cli.run();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockParser).parseCellLocations("user input cell locations");
@@ -54,7 +54,7 @@ public class CLITest {
         stub(mockParser.parseCellLocations(anyString())).toReturn(cells);
 
         //Act
-        cli.run();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockGrid).populate(cells);
@@ -63,7 +63,7 @@ public class CLITest {
     @Test
     public void parsesGridToString() {
         //Act
-        cli.run();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockParser).parseGrid(mockGrid);
@@ -75,10 +75,10 @@ public class CLITest {
         stub(mockParser.parseGrid(mockGrid)).toReturn("grid as string");
 
         //Act
-        cli.run();
+        defaultGameOfLife.run();
 
         //Assert
-        verify(mockUserInteractions).displayOutPut("grid as string");
+        verify(mockCLI).displayOutPut("grid as string");
     }
 
 }
