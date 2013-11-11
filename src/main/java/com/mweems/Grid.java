@@ -1,8 +1,10 @@
 package com.mweems;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Grid {
 
-    void populate(ArrayList<Cell> points);
+    void populate(List<Cell> cells);
+
+    List<Cell> getCells();
 }

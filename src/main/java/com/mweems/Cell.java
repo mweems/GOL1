@@ -17,4 +17,29 @@ public class Cell {
     public int getYLoc() {
         return yLoc;
     }
+
+    @Override
+    public String toString(){
+        return xLoc + "," + yLoc;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cell cell = (Cell) o;
+
+        if (xLoc != cell.xLoc) return false;
+        if (yLoc != cell.yLoc) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = xLoc;
+        result = 31 * result + yLoc;
+        return result;
+    }
 }
