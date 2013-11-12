@@ -1,11 +1,15 @@
 package com.mweems;
 
+import java.util.Scanner;
+
 public class DefaultCLI implements CLI {
 
 
     @Override
     public String promptForCellLocations() {
-        return null;
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Enter cell locations:");
+        return userInput.nextLine();
     }
 
     @Override

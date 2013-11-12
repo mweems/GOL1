@@ -1,8 +1,12 @@
 package com.mweems;
 
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
+
 import static org.junit.Assert.assertEquals;
 
 public class DefaultCLITest {
@@ -20,5 +24,20 @@ public class DefaultCLITest {
 
         //Assert
         assertEquals("grid as string", outContent.toString());
+    }
+
+    @Test
+    public void acceptInputFromUser() {
+        //Arrange
+        DefaultCLI CLI = new DefaultCLI();
+
+        String data = "user input";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+
+        //Act
+        String userInput = CLI.promptForCellLocations();
+
+        //Assert
+        assertEquals(data, userInput);
     }
 }
