@@ -2,25 +2,25 @@ package com.mweems;
 
 public class Cell {
 
-    private int xLoc;
-    private int yLoc;
+    private int x;
+    private int y;
 
-    public Cell(int xLoc, int yLoc) {
-        this.xLoc = xLoc;
-        this.yLoc = yLoc;
+    public Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public int getXLoc() {
-        return xLoc;
+    public int getX() {
+        return x;
     }
 
-    public int getYLoc() {
-        return yLoc;
+    public int getY() {
+        return y;
     }
 
     @Override
     public String toString(){
-        return xLoc + "," + yLoc;
+        return x + "," + y;
     }
 
     @Override
@@ -30,16 +30,16 @@ public class Cell {
 
         Cell cell = (Cell) o;
 
-        if (xLoc != cell.xLoc) return false;
-        if (yLoc != cell.yLoc) return false;
+        if (x != cell.x) return false;
+        if (y != cell.y) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = xLoc;
-        result = 31 * result + yLoc;
+        int result = x;
+        result = 31 * result + y;
         return result;
     }
 }

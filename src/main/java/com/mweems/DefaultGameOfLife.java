@@ -6,23 +6,23 @@ import java.util.List;
 
 public class DefaultGameOfLife implements GameOfLife {
 
-    private CLI CLI;
+    private CLI cli;
     private Parser parser;
     private Grid grid;
 
     @Inject
-    public DefaultGameOfLife(CLI CLI, Parser parser, Grid grid) {
-        this.CLI = CLI;
+    public DefaultGameOfLife(CLI cli, Parser parser, Grid grid) {
+        this.cli = cli;
         this.parser = parser;
         this.grid = grid;
     }
 
     @Override
     public void run() {
-        String userInput = CLI.promptForCellLocations();
+        String userInput = cli.promptForCellLocations();
         List<Cell> cells = parser.parseCellLocations(userInput);
         grid.populate(cells);
         String gridCells = grid.toString();
-        CLI.displayOutPut(gridCells);
+        cli.displayOutPut(gridCells);
     }
 }
