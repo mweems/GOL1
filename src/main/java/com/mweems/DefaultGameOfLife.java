@@ -1,5 +1,7 @@
 package com.mweems;
 
+import com.google.inject.Inject;
+
 import java.util.List;
 
 public class DefaultGameOfLife implements GameOfLife {
@@ -8,6 +10,7 @@ public class DefaultGameOfLife implements GameOfLife {
     private Parser parser;
     private Grid grid;
 
+    @Inject
     public DefaultGameOfLife(CLI CLI, Parser parser, Grid grid) {
         this.CLI = CLI;
         this.parser = parser;
