@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class DefaultCLI implements CLI {
 
-
     @Override
     public String promptForCellLocations() {
         Scanner userInput = new Scanner(System.in);

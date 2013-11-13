@@ -4,12 +4,10 @@ public class Cell {
 
     private int x;
     private int y;
-    private boolean isAlive;
 
-    public Cell(int x, int y, boolean isAlive) {
+    public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.isAlive = isAlive;
     }
 
     public int getX() {
@@ -18,10 +16,6 @@ public class Cell {
 
     public int getY() {
         return y;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
     }
 
     @Override

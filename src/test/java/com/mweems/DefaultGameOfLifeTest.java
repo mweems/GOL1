@@ -25,11 +25,6 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void promptsForCellLocations() {
-
-    }
-
-    @Test
     public void promptsForCellInitializationString() {
         //Act
         defaultGameOfLife.getCells();

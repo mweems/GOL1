@@ -1,5 +1,6 @@
 package com.mweems;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,11 +11,16 @@ import static org.junit.Assert.assertEquals;
 
 public class DefaultCLITest {
 
+    private DefaultCLI cli;
+
+    @Before
+    public void setup() {
+        cli = new DefaultCLI();
+    }
+
     @Test
     public void displayGridAsString() {
         //Arrange
-        DefaultCLI cli = new DefaultCLI();
-
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -28,30 +34,31 @@ public class DefaultCLITest {
     @Test
     public void acceptCellLocationInputFromUser() {
         //Arrange
-        DefaultCLI cli = new DefaultCLI();
-
-        String expectedUserInput = "user input";
-        System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
+        String expectedInput = setInput("cell Locations");
 
         //Act
         String userInput = cli.promptForCellLocations();
 
         //Assert
-        assertEquals(expectedUserInput, userInput);
+        assertEquals(expectedInput, userInput);
     }
 
     @Test
     public void acceptIterationInputFromUser() {
         //Arrange
-        DefaultCLI cli = new DefaultCLI();
-
-        String expectedUserInput = "user input";
-        System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
+        String expectedInput = setInput("iterations");
 
         //Act
         String userInput = cli.promptForNumIterations();
 
         //Assert
-        assertEquals(expectedUserInput, userInput);
+        assertEquals(expectedInput, userInput);
+
+    }
+
+    private String setInput(String inputString) {
+        String expectedUserInput = "user input";
+        System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
+        return expectedUserInput;
     }
 }
