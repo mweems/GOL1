@@ -25,9 +25,14 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
+    public void promptsForCellLocations() {
+
+    }
+
+    @Test
     public void promptsForCellInitializationString() {
         //Act
-        defaultGameOfLife.run();
+        defaultGameOfLife.getCells();
 
         //Assert
         verify(mockCLI).promptForCellLocations();
@@ -39,7 +44,7 @@ public class DefaultGameOfLifeTest {
         stub(mockCLI.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
-        defaultGameOfLife.run();
+        defaultGameOfLife.getCells();
 
         //Assert
         verify(mockParser).parseCellLocations("user input cell locations");
@@ -66,10 +71,31 @@ public class DefaultGameOfLifeTest {
         stub(mockGrid.toString()).toReturn("grid as string");
 
         //Act
-        defaultGameOfLife.run();
+        defaultGameOfLife.displayOutput("grid as string");
 
         //Assert
         verify(mockCLI).displayOutPut("grid as string");
+    }
+
+    @Test
+    public void promptUserForNumberOfIterations() {
+        //Act
+        defaultGameOfLife.getIterations();
+
+        //Assert
+        verify(mockCLI).promptForNumIterations();
+    }
+
+    @Test
+    public void parseNumIterationsString() {
+        //Arrange
+        stub(mockCLI.promptForNumIterations()).toReturn("num iterations");
+
+        //Act
+        defaultGameOfLife.getIterations();
+
+        //Assert
+        verify(mockParser).parsenumIterations("num iterations");
     }
 
 }
