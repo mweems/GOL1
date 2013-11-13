@@ -28,13 +28,28 @@ public class DefaultCLITest {
     @Test
     public void acceptCellLocationInputFromUser() {
         //Arrange
-        DefaultCLI CLI = new DefaultCLI();
+        DefaultCLI cli = new DefaultCLI();
 
         String expectedUserInput = "user input";
         System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
 
         //Act
-        String userInput = CLI.promptForCellLocations();
+        String userInput = cli.promptForCellLocations();
+
+        //Assert
+        assertEquals(expectedUserInput, userInput);
+    }
+
+    @Test
+    public void acceptIterationInputFromUser() {
+        //Arrange
+        DefaultCLI cli = new DefaultCLI();
+
+        String expectedUserInput = "user input";
+        System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
+
+        //Act
+        String userInput = cli.promptForNumIterations();
 
         //Assert
         assertEquals(expectedUserInput, userInput);

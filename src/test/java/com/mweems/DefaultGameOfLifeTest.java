@@ -95,7 +95,7 @@ public class DefaultGameOfLifeTest {
         defaultGameOfLife.getIterations();
 
         //Assert
-        verify(mockParser).parsenumIterations("num iterations");
+        verify(mockParser).parseNumIterations("num iterations");
     }
 
 }

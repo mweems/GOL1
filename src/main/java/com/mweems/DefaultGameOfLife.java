@@ -34,7 +34,7 @@ public class DefaultGameOfLife implements GameOfLife {
     @Override
     public int getIterations() {
         String iterations = cli.promptForNumIterations();
-        return parser.parsenumIterations(iterations);
+        return parser.parseNumIterations(iterations);
     }
 
     @Override

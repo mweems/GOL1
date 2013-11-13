@@ -13,8 +13,13 @@ public class DefaultParser implements Parser{
             String[] cellLocationsSplit = cellPairs.split(",");
             int xLoc = Integer.parseInt(cellLocationsSplit[0]);
             int yLoc = Integer.parseInt(cellLocationsSplit[1]);
-            cells.add(new Cell(xLoc, yLoc));
+            cells.add(new Cell(xLoc, yLoc, true));
         }
         return cells;
+    }
+
+    @Override
+    public int parseNumIterations(String numIterations) {
+        return Integer.parseInt(numIterations);
     }
 }

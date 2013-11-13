@@ -16,4 +16,11 @@ public class DefaultCLI implements CLI {
     public void displayOutPut(String cellLocationsAsString) {
         System.out.print(cellLocationsAsString);
     }
+
+    @Override
+    public String promptForNumIterations() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.print("Enter Number of Iterations:");
+        return userInput.nextLine();
+    }
 }

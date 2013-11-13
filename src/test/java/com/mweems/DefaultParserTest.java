@@ -24,4 +24,16 @@ public class DefaultParserTest {
         assertEquals(4, cells.get(1).getY());
 
     }
+
+    @Test
+    public void parsesStringToInt() {
+        //Arrange
+        DefaultParser parser = new DefaultParser();
+
+        //Act
+        int iterations = parser.parseNumIterations("1");
+
+        //Assert
+        assertEquals(1, iterations);
+    }
 }
