@@ -14,8 +14,8 @@ public class DefaultGridTest {
         //Arrange
         DefaultGrid grid = new DefaultGrid();
         List<Cell> cells = new ArrayList<Cell>();
-        cells.add(new Cell(1,2));
-        cells.add(new Cell(3,4));
+        cells.add(new Cell(1,2,true));
+        cells.add(new Cell(3,4,true));
         grid.populate(cells);
 
         //Act

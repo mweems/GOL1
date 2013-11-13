@@ -25,4 +25,5 @@ public class DefaultGrid implements Grid {
         }
         return cellLocations;
     }
+
 }

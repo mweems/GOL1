@@ -9,5 +9,4 @@ public interface Grid {
     List<Cell> getCells();
 
     String toString();
-
 }
