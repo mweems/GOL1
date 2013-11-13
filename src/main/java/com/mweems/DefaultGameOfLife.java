@@ -19,10 +19,26 @@ public class DefaultGameOfLife implements GameOfLife {
 
     @Override
     public void run() {
-        String userInput = cli.promptForCellLocations();
-        List<Cell> cells = parser.parseCellLocations(userInput);
-        grid.populate(cells);
-        String gridCells = grid.toString();
-        cli.displayOutPut(gridCells);
+        grid.populate(getCells());
+        int numIterations = getIterations();
+
+        displayOutput(grid.toString());
+    }
+
+    @Override
+    public List<Cell> getCells() {
+        String cells = cli.promptForCellLocations();
+        return parser.parseCellLocations(cells);
+    }
+
+    @Override
+    public int getIterations() {
+        String iterations = cli.promptForNumIterations();
+        return parser.parsenumIterations(iterations);
+    }
+
+    @Override
+    public void displayOutput(String gridAsString) {
+        cli.displayOutPut(gridAsString);
     }
 }

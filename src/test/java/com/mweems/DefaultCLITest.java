@@ -26,7 +26,7 @@ public class DefaultCLITest {
     }
 
     @Test
-    public void acceptInputFromUser() {
+    public void acceptCellLocationInputFromUser() {
         //Arrange
         DefaultCLI CLI = new DefaultCLI();
 
