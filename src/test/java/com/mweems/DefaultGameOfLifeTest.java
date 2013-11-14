@@ -93,4 +93,15 @@ public class DefaultGameOfLifeTest {
         verify(mockParser).parseNumIterations("num iterations");
     }
 
+    @Test
+    public void completeOneTick() {
+        //Arrange
+        stub(mockParser.parseNumIterations(anyString())).toReturn(1);
+
+        //Act
+        defaultGameOfLife.run();
+
+        //Assert
+        verify(mockGrid).tick(1);
+    }
 }

@@ -21,6 +21,7 @@ public class DefaultGameOfLife implements GameOfLife {
     public void run() {
         grid.populate(getCells());
         int numIterations = getIterations();
+        grid.populate(grid.tick(numIterations));
 
         displayOutput(grid.toString());
     }

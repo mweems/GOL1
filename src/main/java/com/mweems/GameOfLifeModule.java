@@ -11,7 +11,7 @@ public class GameOfLifeModule extends AbstractModule {
         bind(Grid.class).to(DefaultGrid.class);
         bind(Parser.class).to(DefaultParser.class);
         bind(CLI.class).to(DefaultCLI.class);
-
+        bind(Judge.class).to(DefaultJudge.class);
     }
 
 }
