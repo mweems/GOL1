@@ -58,7 +58,21 @@ public class DefaultJudgeTest {
 
         //Assert
         assertTrue(isAlive);
+    }
 
+    @Test
+    public void isAliveReturnsFalseWhenCellHasMoreThanThreeNeighbors() {
+        //Arrange
+        cells.add(new Cell(0,1));
+        cells.add(new Cell(2,2));
+        cells.add(new Cell(1,1));
+        cells.add(new Cell(2,1));
+        grid.populate(cells);
 
+        //Act
+        Boolean isAlive = judge.isAlive(neighbors, grid);
+
+        //Assert
+        assertFalse(isAlive);
     }
 }
