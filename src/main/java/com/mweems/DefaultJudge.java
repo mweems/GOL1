@@ -8,13 +8,25 @@ public class DefaultJudge implements Judge {
     private int MAXLIVENEIGHBORS = 3;
 
     @Override
-    public boolean isAlive(List<Cell> neighbors, Grid grid) {
+    public boolean isAlive(List<Cell> neighbors, Grid grid, Cell cell) {
         int liveNeighbors = 0;
-        for(Cell cell : neighbors){
-            if(grid.getCells().contains(cell)) liveNeighbors++;
+        for(Cell neighborCell : neighbors){
+            if(grid.getCells().contains(neighborCell)) liveNeighbors++;
         }
-        if(liveNeighbors < MINLIVENEIGHBORS || liveNeighbors > MAXLIVENEIGHBORS) return false;
+        if(cell.isAlive()) {
+            return alive(liveNeighbors);
+        } else {
+            return dead(liveNeighbors);
+        }
+    }
 
+    private boolean dead(int liveNeighbors) {
+        if(liveNeighbors == MAXLIVENEIGHBORS) return true;
+        return false;
+    }
+
+    private boolean alive(int liveNeighbors) {
+        if(liveNeighbors < MINLIVENEIGHBORS || liveNeighbors > MAXLIVENEIGHBORS) return false;
         return true;
     }
 }

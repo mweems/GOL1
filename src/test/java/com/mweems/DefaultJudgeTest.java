@@ -15,12 +15,14 @@ public class DefaultJudgeTest {
     private Grid grid;
     private List<Cell> cells;
     private List<Cell> neighbors;
+    private Cell cell;
 
     @Before
     public void setup() {
         judge = new DefaultJudge();
         cells = new ArrayList<Cell>();
         grid = new DefaultGrid(judge);
+        cell = new Cell(1,2);
         neighbors = new ArrayList<Cell>();
         neighbors.add(new Cell(0,1));
         neighbors.add(new Cell(0,2));
@@ -39,7 +41,7 @@ public class DefaultJudgeTest {
         grid.populate(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(neighbors, grid);
+        Boolean isAlive = judge.isAlive(neighbors, grid, cell);
 
         //Assert
         assertFalse(isAlive);
@@ -54,7 +56,7 @@ public class DefaultJudgeTest {
         grid.populate(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(neighbors, grid);
+        Boolean isAlive = judge.isAlive(neighbors, grid, cell);
 
         //Assert
         assertTrue(isAlive);
@@ -70,9 +72,25 @@ public class DefaultJudgeTest {
         grid.populate(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(neighbors, grid);
+        Boolean isAlive = judge.isAlive(neighbors, grid, cell);
 
         //Assert
         assertFalse(isAlive);
+    }
+
+    @Test
+    public void DeadCellStaysDeadWhenSurroundedByTwoOrLessLiveNeighbors() {
+        //Arrange
+        cell.setAlive(false);
+        cells.add(new Cell(2,2));
+        cells.add(new Cell(1,1));
+        grid.populate(cells);
+
+        //Act
+        Boolean isAlive = judge.isAlive(neighbors, grid, cell);
+
+        //Assert
+        assertFalse(isAlive);
+
     }
 }

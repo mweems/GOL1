@@ -4,6 +4,7 @@ public class Cell {
 
     private int x;
     private int y;
+    private boolean isAlive = true;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -16,6 +17,14 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
+    }
+
+    public void setAlive(Boolean alive){
+        isAlive = alive;
     }
 
     @Override

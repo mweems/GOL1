@@ -40,8 +40,15 @@ public class DefaultGrid implements Grid {
         for(int i = 0; i < iterations; i++){
             for(Cell cell : cells) {
                 List<Cell> neighbors = getNeighbors(cell);
-                if(judge.isAlive(neighbors, this)) {
+                if(judge.isAlive(neighbors, this, cell)) {
                     nextGen.add(cell);
+                }
+                for(Cell neighborCell : neighbors){
+                    List<Cell> otherNeighbors = getNeighbors(neighborCell);
+                    if(judge.isAlive(otherNeighbors, this, neighborCell) && !nextGen.contains(neighborCell)){
+                        neighborCell.setAlive(true);
+                        nextGen.add(neighborCell);
+                    }
                 }
             }
         }
@@ -58,6 +65,10 @@ public class DefaultGrid implements Grid {
         neighbors.add(new Cell(cell.getX()+1,cell.getY()-1));
         neighbors.add(new Cell(cell.getX()+1,cell.getY()));
         neighbors.add(new Cell(cell.getX()+1,cell.getY()+1));
+
+        for(Cell neighborCell:neighbors){
+            neighborCell.setAlive(false);
+        }
         return neighbors;
     }
 }
