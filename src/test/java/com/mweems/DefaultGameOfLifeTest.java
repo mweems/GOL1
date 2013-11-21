@@ -3,7 +3,8 @@ package com.mweems;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -12,16 +13,16 @@ public class DefaultGameOfLifeTest {
     private CLI mockCLI;
     private Parser mockParser;
     private Grid mockGrid;
-    private DefaultGameOfLife defaultGameOfLife;
     private Cell mockCell;
+    private DefaultGameOfLife defaultGameOfLife;
 
     @Before
     public void setup() {
         mockCLI = mock(CLI.class);
         mockParser = mock(Parser.class);
         mockGrid = mock(Grid.class);
-        defaultGameOfLife = new DefaultGameOfLife(mockCLI, mockParser, mockGrid);
         mockCell = mock(Cell.class);
+        defaultGameOfLife = new DefaultGameOfLife(mockCLI, mockParser, mockGrid);
     }
 
     @Test
@@ -48,8 +49,7 @@ public class DefaultGameOfLifeTest {
     @Test
     public void populatesGridWithCells() {
         //Arrange
-        ArrayList<Cell> cells = new ArrayList<Cell>();
-        cells.add(mockCell);
+        List<Cell> cells = Arrays.asList(mockCell);
 
         stub(mockParser.parseCellLocations(anyString())).toReturn(cells);
 
@@ -82,7 +82,7 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void parseNumIterationsString() {
+    public void parseNumberOfIterationsToString() {
         //Arrange
         stub(mockCLI.promptForNumIterations()).toReturn("num iterations");
 
@@ -94,7 +94,7 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void runMethodCallsTickMethodOnGrid() {
+    public void callTickWithCorrectNumberOfIterations() {
         //Arrange
         stub(mockParser.parseNumIterations(anyString())).toReturn(1);
 

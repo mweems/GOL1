@@ -1,7 +1,6 @@
 package com.mweems;
 
 import com.google.inject.Inject;
-
 import java.util.List;
 
 public class DefaultGameOfLife implements GameOfLife {

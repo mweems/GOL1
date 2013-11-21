@@ -8,7 +8,7 @@ public class DefaultJudge implements Judge {
     private int MAXLIVENEIGHBORS = 3;
 
     @Override
-    public boolean isAlive(List<Cell> neighbors, Grid grid, Cell cell) {
+    public boolean isAlive(Cell cell, List<Cell> neighbors, Grid grid) {
         int liveNeighbors = 0;
         for(Cell neighborCell : neighbors){
             if(grid.getCells().contains(neighborCell)) liveNeighbors++;

@@ -1,7 +1,6 @@
 package com.mweems;
 
 import com.google.inject.Inject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,15 +25,6 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
-    public String toString() {
-        String cellLocations = "";
-        for(Cell cell : cells){
-            cellLocations += cell.toString();
-            if(!cell.equals(cells.get(cells.size()-1))) cellLocations += " ";
-        }
-        return cellLocations;
-    }
-
     public List<Cell> tick(int iterations) {
         List<Cell> nextGen = new ArrayList<Cell>();
         for(int i = 0; i < iterations; i++){
@@ -43,10 +33,19 @@ public class DefaultGrid implements Grid {
         return nextGen;
     }
 
+    @Override
+    public String toString() {
+        String cellLocations = "";
+        for(Cell cell : cells){
+            cellLocations += cell.toString();
+            if(thisCellIsNotLastCell(cell)) cellLocations += " ";
+        }
+        return cellLocations;
+    }
     private void judgeCells(List<Cell> nextGen) {
         for(Cell cell : cells) {
             List<Cell> neighbors = getNeighbors(cell);
-            if(judge.isAlive(neighbors, this, cell)) {
+            if(judge.isAlive(cell, neighbors, this)) {
                 nextGen.add(cell);
             }
             judgeDeadCells(nextGen, neighbors);
@@ -56,11 +55,15 @@ public class DefaultGrid implements Grid {
     private void judgeDeadCells(List<Cell> nextGen, List<Cell> neighbors) {
         for(Cell neighborCell : neighbors){
             List<Cell> otherNeighbors = getNeighbors(neighborCell);
-            if(judge.isAlive(otherNeighbors, this, neighborCell) && !nextGen.contains(neighborCell)){
+            if(judge.isAlive(neighborCell, otherNeighbors, this) && !nextGen.contains(neighborCell)){
                 neighborCell.setAlive(true);
                 nextGen.add(neighborCell);
             }
         }
+    }
+
+    private boolean thisCellIsNotLastCell(Cell cell) {
+        return !cell.equals(cells.get(cells.size()-1));
     }
 
     private List<Cell> getNeighbors(Cell cell) {

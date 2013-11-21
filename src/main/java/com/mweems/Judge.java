@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Judge {
 
-    boolean isAlive(List<Cell> neighbors, Grid grid, Cell cell);
+    boolean isAlive(Cell cell, List<Cell> neighbors, Grid grid);
 }

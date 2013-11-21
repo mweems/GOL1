@@ -1,18 +1,21 @@
 package com.mweems;
 
+import org.junit.Before;
 import org.junit.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
 public class DefaultParserTest {
 
+    DefaultParser parser;
+
+    @Before
+    public void setup(){
+        parser = new DefaultParser();
+    }
+
     @Test
     public void parseStringArrayOfCells() {
-        //Arrange
-        DefaultParser parser = new DefaultParser();
-
         //Act
         List<Cell> cells = parser.parseCellLocations("1,2 3,4");
 
@@ -27,9 +30,6 @@ public class DefaultParserTest {
 
     @Test
     public void parsesStringToInt() {
-        //Arrange
-        DefaultParser parser = new DefaultParser();
-
         //Act
         int iterations = parser.parseNumIterations("1");
 

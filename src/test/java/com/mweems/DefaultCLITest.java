@@ -34,7 +34,7 @@ public class DefaultCLITest {
     @Test
     public void acceptCellLocationInputFromUser() {
         //Arrange
-        String expectedInput = setInput("cell Locations");
+        String expectedInput = setInput();
 
         //Act
         String userInput = cli.promptForCellLocations();
@@ -46,7 +46,7 @@ public class DefaultCLITest {
     @Test
     public void acceptIterationInputFromUser() {
         //Arrange
-        String expectedInput = setInput("iterations");
+        String expectedInput = setInput();
 
         //Act
         String userInput = cli.promptForNumIterations();
@@ -56,7 +56,7 @@ public class DefaultCLITest {
 
     }
 
-    private String setInput(String inputString) {
+    private String setInput() {
         String expectedUserInput = "user input";
         System.setIn(new ByteArrayInputStream(expectedUserInput.getBytes()));
         return expectedUserInput;
