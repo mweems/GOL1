@@ -18,8 +18,8 @@ public class CLI implements UserInterface {
     @Override
     public void run() {
         String userInput = userInteraction.promptForCellLocations();
-        ArrayList<Point> points = parser.parseString(userInput);
-        grid.populate(points);
+        ArrayList<Cell> cells = parser.parseString(userInput);
+        grid.populate();
         String cellLocationsAsString = parser.parseGrid(grid);
         userInteraction.displayOutput(cellLocationsAsString);
     }

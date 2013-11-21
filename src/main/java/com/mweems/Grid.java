@@ -5,5 +5,5 @@ import java.util.ArrayList;
 
 public interface Grid {
 
-    void populate(ArrayList<Point> points);
+    void populate(ArrayList<Cell> cells);
 }

@@ -69,7 +69,9 @@ public class CLITest {
     @Test
     public void passStringOfCellLocationsToUserInteractions() {
         //Arrange
-        stub(mockParser.parseGrid(mockGrid)).toReturn("grid as string");
+        ArrayList<Point> points = new ArrayList<Point>();
+        points.add(new Point(1,2));
+        stub(mockGrid.populate(ArrayList<Point>)
 
         //Act
         cli.run();
