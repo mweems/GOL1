@@ -94,7 +94,7 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void completeOneTick() {
+    public void runMethodCallsTickMethodOnGrid() {
         //Arrange
         stub(mockParser.parseNumIterations(anyString())).toReturn(1);
 
