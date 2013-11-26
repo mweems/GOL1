@@ -1,6 +1,8 @@
 package com.mweems;
 
 import com.google.inject.Inject;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +37,14 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
-    public String toString() {
-        String cellLocations = "";
+    public List<Point> getListOfCellLocations(){
+        List<Point> cellLocations = new ArrayList<Point>();
         for(Cell cell : cells){
-            cellLocations += cell.toString();
-            if(thisCellIsNotTheLastCell(cell)) cellLocations += " ";
+            cellLocations.add(new Point(cell.getX(), cell.getY()));
         }
         return cellLocations;
     }
+
 
     private void judgeCells() {
         for(Cell cell : cells) {
@@ -64,20 +66,16 @@ public class DefaultGrid implements Grid {
         }
     }
 
-    private boolean thisCellIsNotTheLastCell(Cell cell) {
-        return !cell.equals(cells.get(cells.size()-1));
-    }
-
     private List<Cell> getNeighbors(Cell cell) {
         List<Cell> neighbors = new ArrayList<Cell>();
-        neighbors.add(new Cell(cell.getX()-1,cell.getY()-1));
-        neighbors.add(new Cell(cell.getX()-1,cell.getY()));
-        neighbors.add(new Cell(cell.getX()-1,cell.getY()+1));
-        neighbors.add(new Cell(cell.getX(),cell.getY()-1));
-        neighbors.add(new Cell(cell.getX(),cell.getY()+1));
-        neighbors.add(new Cell(cell.getX()+1,cell.getY()-1));
-        neighbors.add(new Cell(cell.getX()+1,cell.getY()));
-        neighbors.add(new Cell(cell.getX()+1,cell.getY()+1));
+        neighbors.add(new Cell(cell.getX() - 1, cell.getY() - 1));
+        neighbors.add(new Cell(cell.getX() - 1, cell.getY()));
+        neighbors.add(new Cell(cell.getX() - 1, cell.getY() + 1));
+        neighbors.add(new Cell(cell.getX(), cell.getY() - 1));
+        neighbors.add(new Cell(cell.getX(), cell.getY() + 1));
+        neighbors.add(new Cell(cell.getX() + 1, cell.getY() - 1));
+        neighbors.add(new Cell(cell.getX() + 1, cell.getY()));
+        neighbors.add(new Cell(cell.getX() + 1, cell.getY() + 1));
 
         for(Cell neighborCell:neighbors){
             neighborCell.setAlive(false);

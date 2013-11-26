@@ -20,20 +20,6 @@ public class DefaultGridTest {
     }
 
     @Test
-    public void gridReturnsStringValueOfCellLocations() {
-        //Arrange
-        DefaultGrid grid = new DefaultGrid(mockJudge);
-        List<Cell> cells = Arrays.asList(new Cell(1,2), new Cell(3,4));
-        grid.populate(cells);
-
-        //Act
-        String gridAsString = grid.toString();
-
-        //Assert
-        assertEquals("1,2 3,4", gridAsString);
-    }
-
-    @Test
     public void gridHasNoCellsAfterOneTickWhenStartingWithOneCell() {
         //Arrange
         Cell testCell = new Cell(1,2);

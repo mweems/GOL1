@@ -21,7 +21,7 @@ public class DefaultGameOfLife implements GameOfLife {
     public void run() {
         grid.populate(getCellLocationsFromUser());
         grid.tick(getNumberOfIterationsFromUser());
-        displayOutput(grid.toString());
+        cli.displayOutPut(grid);
     }
 
     private List<Cell> getCellLocationsFromUser() {
@@ -42,10 +42,5 @@ public class DefaultGameOfLife implements GameOfLife {
             cli.displayErrorMessage("Only Numbers allowed for Number of Iterations");
             return getNumberOfIterationsFromUser();
         }
-    }
-
-
-    private void displayOutput(String locationsOfLiveCells) {
-        cli.displayOutPut(locationsOfLiveCells);
     }
 }

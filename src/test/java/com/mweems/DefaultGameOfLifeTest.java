@@ -60,15 +60,12 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void passStringToUserInteractionsForDisplayToUser() {
-        //Arrange
-        stub(mockGrid.toString()).toReturn("grid as string");
-
+    public void passGridToUserInteractionsForDisplayToUser() {
         //Act
         defaultGameOfLife.run();
 
         //Assert
-        verify(mockCLI).displayOutPut("grid as string");
+        verify(mockCLI).displayOutPut(mockGrid);
     }
 
     @Test

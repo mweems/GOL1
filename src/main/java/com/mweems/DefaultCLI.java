@@ -1,5 +1,6 @@
 package com.mweems;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class DefaultCLI implements CLI {
@@ -15,9 +16,16 @@ public class DefaultCLI implements CLI {
     }
 
     @Override
-    public void displayOutPut(String cellLocationsAsString) {
-        if(cellLocationsAsString == "") System.out.println("No Living Cells");
-        System.out.print(cellLocationsAsString);
+    public void displayOutPut(Grid grid) {
+            String listOfCellLocations = "";
+        if(grid.getListOfCellLocations().isEmpty()){
+            System.out.print("No Living Cells");
+        } else {
+            for(Point cellLocation : grid.getListOfCellLocations()){
+                listOfCellLocations += cellLocation.toString();
+            }
+        }
+        System.out.print(listOfCellLocations);
     }
 
     @Override

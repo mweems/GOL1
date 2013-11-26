@@ -23,12 +23,14 @@ public class DefaultCLITest {
         //Arrange
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
+        Judge judge = new DefaultJudge();
+        Grid grid = new DefaultGrid(judge);
 
         //Act
-        cli.displayOutPut("grid as string");
+        cli.displayOutPut(grid);
 
         //Assert
-        assertEquals("grid as string", outContent.toString());
+        assertEquals("No Living Cells", outContent.toString());
     }
 
     @Test

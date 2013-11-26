@@ -6,7 +6,7 @@ public interface CLI {
 
     String promptForNumIterations();
 
-    void displayOutPut(String cellLocationsAsString);
+    void displayOutPut(Grid grid);
 
     void displayErrorMessage(String message);
 

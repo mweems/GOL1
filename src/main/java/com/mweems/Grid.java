@@ -1,5 +1,6 @@
 package com.mweems;
 
+import java.awt.*;
 import java.util.List;
 
 public interface Grid {
@@ -9,4 +10,6 @@ public interface Grid {
     void tick(int iterations);
 
     boolean contains(Cell neighborCell);
+
+    List<Point> getListOfCellLocations();
 }
