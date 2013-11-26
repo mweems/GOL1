@@ -106,7 +106,7 @@ public class DefaultGameOfLifeTest {
     }
 
     @Test
-    public void getCellsHandlesIncorrectUserInput() {
+    public void getCellsHandlesIncorrectUserInputForCellLocations() {
        //Arrange
         stub(mockCLI.promptForCellLocations()).toThrow(new NumberFormatException());
 
@@ -114,6 +114,18 @@ public class DefaultGameOfLifeTest {
         defaultGameOfLife.getCells();
 
         //Assert
-        verify(mockCLI).displayError();
+        verify(mockCLI).displayCellLocationErrorAndPrompt();
+    }
+
+    @Test
+    public void getCellsHandlesIncorrectUserInputForIterations() {
+       //Arrange
+        stub(mockCLI.promptForNumIterations()).toThrow(new NumberFormatException());
+
+        //Act
+        defaultGameOfLife.getIterations();
+
+        //Assert
+        verify(mockCLI).displayIterationErrorAndPrompt();
     }
 }

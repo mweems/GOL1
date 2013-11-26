@@ -28,21 +28,24 @@ public class DefaultGameOfLife implements GameOfLife {
 
     @Override
     public List<Cell> getCells() {
-        List<Cell> parsedCells;
         try{
             String cells = cli.promptForCellLocations();
-            parsedCells = parser.parseCellLocations(cells);
+            return parser.parseCellLocations(cells);
         } catch (NumberFormatException e){
-            String cells = cli.displayError();
-            parsedCells = parser.parseCellLocations(cells);
+            String cells = cli.displayCellLocationErrorAndPrompt();
+            return parser.parseCellLocations(cells);
         }
-        return parsedCells;
     }
 
     @Override
     public int getIterations() {
-        String iterations = cli.promptForNumIterations();
-        return parser.parseNumIterations(iterations);
+        try{
+            String iterations = cli.promptForNumIterations();
+            return  parser.parseNumIterations(iterations);
+        } catch (NumberFormatException e) {
+            String iterations = cli.displayIterationErrorAndPrompt();
+            return parser.parseNumIterations(iterations);
+        }
     }
 
     @Override

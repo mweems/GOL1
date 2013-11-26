@@ -20,9 +20,15 @@ public class DefaultCLI implements CLI {
     }
 
     @Override
-    public String displayError() {
+    public String displayCellLocationErrorAndPrompt() {
         System.out.println("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
         return promptForCellLocations();
+    }
+
+    @Override
+    public String displayIterationErrorAndPrompt() {
+        System.out.println("Only Numbers allowed for Number Of Iterations");
+        return promptForNumIterations();
     }
 
     private String prompt(String message){
