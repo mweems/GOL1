@@ -24,8 +24,7 @@ public class DefaultGameOfLife implements GameOfLife {
         displayOutput(grid.toString());
     }
 
-    @Override
-    public List<Cell> getCellLocationsFromUser() {
+    private List<Cell> getCellLocationsFromUser() {
         try{
             String cells = cli.promptForCellLocations();
             return parser.parseCellLocations(cells);
@@ -35,8 +34,7 @@ public class DefaultGameOfLife implements GameOfLife {
         }
     }
 
-    @Override
-    public int getIterationsFromUser() {
+    private int getIterationsFromUser() {
         try{
             String iterations = cli.promptForNumIterations();
             return  parser.parseNumIterations(iterations);
@@ -46,8 +44,8 @@ public class DefaultGameOfLife implements GameOfLife {
         }
     }
 
-    @Override
-    public void displayOutput(String gridAsString) {
+
+    private void displayOutput(String gridAsString) {
         cli.displayOutPut(gridAsString);
     }
 }

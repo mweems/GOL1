@@ -28,7 +28,7 @@ public class DefaultGameOfLifeTest {
     @Test
     public void promptsForCellInitializationString() {
         //Act
-        defaultGameOfLife.getCellLocationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockCLI).promptForCellLocations();
@@ -40,7 +40,7 @@ public class DefaultGameOfLifeTest {
         stub(mockCLI.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
-        defaultGameOfLife.getCellLocationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockParser).parseCellLocations("user input cell locations");
@@ -50,7 +50,6 @@ public class DefaultGameOfLifeTest {
     public void populatesGridWithCells() {
         //Arrange
         List<Cell> cells = Arrays.asList(mockCell);
-
         stub(mockParser.parseCellLocations(anyString())).toReturn(cells);
 
         //Act
@@ -66,7 +65,7 @@ public class DefaultGameOfLifeTest {
         stub(mockGrid.toString()).toReturn("grid as string");
 
         //Act
-        defaultGameOfLife.displayOutput("grid as string");
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockCLI).displayOutPut("grid as string");
@@ -75,7 +74,7 @@ public class DefaultGameOfLifeTest {
     @Test
     public void promptUserForNumberOfIterations() {
         //Act
-        defaultGameOfLife.getIterationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockCLI).promptForNumIterations();
@@ -87,7 +86,7 @@ public class DefaultGameOfLifeTest {
         stub(mockCLI.promptForNumIterations()).toReturn("num iterations");
 
         //Act
-        defaultGameOfLife.getIterationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockParser).parseNumIterations("num iterations");
@@ -112,7 +111,7 @@ public class DefaultGameOfLifeTest {
         when(mockCLI.promptForCellLocations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
-        defaultGameOfLife.getCellLocationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockCLI).displayError(errorMessage);
@@ -125,7 +124,7 @@ public class DefaultGameOfLifeTest {
         when(mockCLI.promptForNumIterations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
-        defaultGameOfLife.getIterationsFromUser();
+        defaultGameOfLife.run();
 
         //Assert
         verify(mockCLI).displayError(errorMessage);
