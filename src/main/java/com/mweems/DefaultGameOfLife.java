@@ -1,6 +1,7 @@
 package com.mweems;
 
 import com.google.inject.Inject;
+
 import java.util.List;
 
 public class DefaultGameOfLife implements GameOfLife {
@@ -27,8 +28,15 @@ public class DefaultGameOfLife implements GameOfLife {
 
     @Override
     public List<Cell> getCells() {
-        String cells = cli.promptForCellLocations();
-        return parser.parseCellLocations(cells);
+        List<Cell> parsedCells;
+        try{
+            String cells = cli.promptForCellLocations();
+            parsedCells = parser.parseCellLocations(cells);
+        } catch (NumberFormatException e){
+            String cells = cli.displayError();
+            parsedCells = parser.parseCellLocations(cells);
+        }
+        return parsedCells;
     }
 
     @Override

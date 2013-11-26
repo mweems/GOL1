@@ -16,7 +16,6 @@ public class DefaultGrid implements Grid {
 
     @Override
     public void populate(List<Cell> cells) {
-        this.cells.clear();
         this.cells = cells;
     }
 

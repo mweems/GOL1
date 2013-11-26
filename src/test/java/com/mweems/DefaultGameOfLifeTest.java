@@ -104,4 +104,16 @@ public class DefaultGameOfLifeTest {
         //Assert
         verify(mockGrid).tick(1);
     }
+
+    @Test
+    public void getCellsHandlesIncorrectUserInput() {
+       //Arrange
+        stub(mockCLI.promptForCellLocations()).toThrow(new NumberFormatException());
+
+        //Act
+        defaultGameOfLife.getCells();
+
+        //Assert
+        verify(mockCLI).displayError();
+    }
 }

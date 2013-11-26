@@ -7,4 +7,6 @@ public interface CLI {
     void displayOutPut(String cellLocationsAsString);
 
     String promptForNumIterations();
+
+    String displayError();
 }

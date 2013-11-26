@@ -19,6 +19,12 @@ public class DefaultCLI implements CLI {
         return prompt("Enter Number of Iterations:");
     }
 
+    @Override
+    public String displayError() {
+        System.out.println("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
+        return promptForCellLocations();
+    }
+
     private String prompt(String message){
         Scanner userInput = new Scanner(System.in);
         System.out.print(message);
