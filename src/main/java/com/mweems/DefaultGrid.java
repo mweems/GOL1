@@ -16,6 +16,7 @@ public class DefaultGrid implements Grid {
 
     @Override
     public void populate(List<Cell> cells) {
+        this.cells.clear();
         this.cells = cells;
     }
 
@@ -45,7 +46,7 @@ public class DefaultGrid implements Grid {
     private void judgeCells(List<Cell> nextGen) {
         for(Cell cell : cells) {
             List<Cell> neighbors = getNeighbors(cell);
-            if(judge.isAlive(cell, neighbors, this)) {
+            if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)) {
                 nextGen.add(cell);
             }
             judgeDeadCells(nextGen, neighbors);
