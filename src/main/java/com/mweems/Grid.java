@@ -6,9 +6,7 @@ public interface Grid {
 
     void populate(List<Cell> cells);
 
-    List<Cell> getCells();
-
     void tick(int iterations);
 
-    String toString();
+    boolean contains(Cell neighborCell);
 }

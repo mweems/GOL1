@@ -6,9 +6,9 @@ public interface GameOfLife {
 
     void run();
 
-    List<Cell> getCells();
+    List<Cell> getCellLocationsFromUser();
 
-    int getIterations();
+    int getIterationsFromUser();
 
     void displayOutput(String gridAsString);
 }

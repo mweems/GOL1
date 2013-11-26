@@ -28,7 +28,7 @@ public class DefaultGameOfLifeTest {
     @Test
     public void promptsForCellInitializationString() {
         //Act
-        defaultGameOfLife.getCells();
+        defaultGameOfLife.getCellLocationsFromUser();
 
         //Assert
         verify(mockCLI).promptForCellLocations();
@@ -40,7 +40,7 @@ public class DefaultGameOfLifeTest {
         stub(mockCLI.promptForCellLocations()).toReturn("user input cell locations");
 
         //Act
-        defaultGameOfLife.getCells();
+        defaultGameOfLife.getCellLocationsFromUser();
 
         //Assert
         verify(mockParser).parseCellLocations("user input cell locations");
@@ -75,7 +75,7 @@ public class DefaultGameOfLifeTest {
     @Test
     public void promptUserForNumberOfIterations() {
         //Act
-        defaultGameOfLife.getIterations();
+        defaultGameOfLife.getIterationsFromUser();
 
         //Assert
         verify(mockCLI).promptForNumIterations();
@@ -87,7 +87,7 @@ public class DefaultGameOfLifeTest {
         stub(mockCLI.promptForNumIterations()).toReturn("num iterations");
 
         //Act
-        defaultGameOfLife.getIterations();
+        defaultGameOfLife.getIterationsFromUser();
 
         //Assert
         verify(mockParser).parseNumIterations("num iterations");
@@ -112,7 +112,7 @@ public class DefaultGameOfLifeTest {
         when(mockCLI.promptForCellLocations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
-        defaultGameOfLife.getCells();
+        defaultGameOfLife.getCellLocationsFromUser();
 
         //Assert
         verify(mockCLI).displayError(errorMessage);
@@ -125,7 +125,7 @@ public class DefaultGameOfLifeTest {
         when(mockCLI.promptForNumIterations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
-        defaultGameOfLife.getIterations();
+        defaultGameOfLife.getIterationsFromUser();
 
         //Assert
         verify(mockCLI).displayError(errorMessage);

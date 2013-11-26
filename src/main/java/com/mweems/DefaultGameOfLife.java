@@ -6,9 +6,9 @@ import java.util.List;
 
 public class DefaultGameOfLife implements GameOfLife {
 
-    private CLI cli;
-    private Parser parser;
-    private Grid grid;
+    private final CLI cli;
+    private final Parser parser;
+    private final Grid grid;
 
     @Inject
     public DefaultGameOfLife(CLI cli, Parser parser, Grid grid) {
@@ -19,34 +19,30 @@ public class DefaultGameOfLife implements GameOfLife {
 
     @Override
     public void run() {
-        grid.populate(getCells());
-        grid.tick(getIterations());
-        grid.populate(grid.getCells());
-
+        grid.populate(getCellLocationsFromUser());
+        grid.tick(getIterationsFromUser());
         displayOutput(grid.toString());
     }
 
     @Override
-    public List<Cell> getCells() {
+    public List<Cell> getCellLocationsFromUser() {
         try{
             String cells = cli.promptForCellLocations();
             return parser.parseCellLocations(cells);
         } catch (NumberFormatException e){
             cli.displayError("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
-            String cells = cli.promptForCellLocations();
-            return parser.parseCellLocations(cells);
+            return getCellLocationsFromUser();
         }
     }
 
     @Override
-    public int getIterations() {
+    public int getIterationsFromUser() {
         try{
             String iterations = cli.promptForNumIterations();
             return  parser.parseNumIterations(iterations);
         } catch (NumberFormatException e) {
             cli.displayError("Only Numbers allowed for Number of Iterations");
-            String iterations = cli.promptForNumIterations();
-            return parser.parseNumIterations(iterations);
+            return getIterationsFromUser();
         }
     }
 

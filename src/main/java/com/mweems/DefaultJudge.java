@@ -4,14 +4,14 @@ import java.util.List;
 
 public class DefaultJudge implements Judge {
 
-    private int MINLIVENEIGHBORS = 2;
-    private int MAXLIVENEIGHBORS = 3;
+    private final int MINLIVENEIGHBORS = 2;
+    private final int MAXLIVENEIGHBORS = 3;
 
     @Override
     public boolean isAlive(Cell cell, List<Cell> neighbors, Grid grid) {
         int liveNeighbors = 0;
         for(Cell neighborCell : neighbors){
-            if(grid.getCells().contains(neighborCell)) liveNeighbors++;
+            if(grid.contains(neighborCell)) liveNeighbors++;
         }
         if(cell.isAlive()) {
             return alive(liveNeighbors);

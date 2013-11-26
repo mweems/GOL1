@@ -7,7 +7,7 @@ import java.util.List;
 public class DefaultGrid implements Grid {
 
     List<Cell> cells = new ArrayList<Cell>();
-    Judge judge;
+    private final Judge judge;
 
     @Inject
     public DefaultGrid(Judge judge) {
@@ -20,17 +20,18 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
-    public List<Cell> getCells() {
-        return cells;
-    }
-
-    @Override
     public void tick(int iterations) {
         List<Cell> nextGen = new ArrayList<Cell>();
         for(int i = 0; i < iterations; i++){
             judgeCells(nextGen);
         }
-        this.cells = nextGen;
+        this.populate(nextGen);
+    }
+
+    @Override
+    public boolean contains(Cell neighborCell) {
+        if(cells.contains(neighborCell)) return true;
+        return false;
     }
 
     @Override
@@ -42,6 +43,7 @@ public class DefaultGrid implements Grid {
         }
         return cellLocations;
     }
+
     private void judgeCells(List<Cell> nextGen) {
         for(Cell cell : cells) {
             List<Cell> neighbors = getNeighbors(cell);
