@@ -7,6 +7,7 @@ import java.util.List;
 public class DefaultGrid implements Grid {
 
     List<Cell> cells = new ArrayList<Cell>();
+    List<Cell> nextGen = new ArrayList<Cell>();
     private final Judge judge;
 
     @Inject
@@ -21,9 +22,8 @@ public class DefaultGrid implements Grid {
 
     @Override
     public void tick(int iterations) {
-        List<Cell> nextGen = new ArrayList<Cell>();
         for(int i = 0; i < iterations; i++){
-            judgeCells(nextGen);
+            judgeCells();
         }
         this.populate(nextGen);
     }
@@ -44,17 +44,17 @@ public class DefaultGrid implements Grid {
         return cellLocations;
     }
 
-    private void judgeCells(List<Cell> nextGen) {
+    private void judgeCells() {
         for(Cell cell : cells) {
             List<Cell> neighbors = getNeighbors(cell);
             if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)) {
                 nextGen.add(cell);
             }
-            judgeDeadCells(nextGen, neighbors);
+            judgeDeadCells(neighbors);
         }
     }
 
-    private void judgeDeadCells(List<Cell> nextGen, List<Cell> cells) {
+    private void judgeDeadCells(List<Cell> cells) {
         for(Cell cell : cells){
             List<Cell> neighbors = getNeighbors(cell);
             if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)){

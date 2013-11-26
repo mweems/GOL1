@@ -11,9 +11,9 @@ public class DefaultParser implements Parser{
         String[] cellLocationsPaired = cellLocations.split(" ");
         for(String cellPair : cellLocationsPaired){
             String[] splitCellLocations = cellPair.split(",");
-            int xLoc = Integer.parseInt(splitCellLocations[0]);
-            int yLoc = Integer.parseInt(splitCellLocations[1]);
-            cells.add(new Cell(xLoc, yLoc));
+            int x = Integer.parseInt(splitCellLocations[0]);
+            int y = Integer.parseInt(splitCellLocations[1]);
+            cells.add(new Cell(x, y));
         }
         return cells;
     }
