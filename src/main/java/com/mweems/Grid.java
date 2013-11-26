@@ -8,7 +8,7 @@ public interface Grid {
 
     List<Cell> getCells();
 
-    List<Cell> tick(int iterations);
+    void tick(int iterations);
 
     String toString();
 }

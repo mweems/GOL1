@@ -44,8 +44,8 @@ public class DefaultGridTest {
         stub(mockJudge.isAlive(new Cell(1,2), cells, grid)).toReturn(false);
 
         //Act
-        List<Cell> newCells = grid.tick(1);
-        grid.populate(newCells);
+        grid.tick(1);
+        grid.populate(grid.getCells());
 
         //Assert
         assertEquals(expected, grid.getCells());
@@ -61,8 +61,8 @@ public class DefaultGridTest {
         grid.populate(cells);
 
         //Act
-        List<Cell> newCells = grid.tick(1);
-        grid.populate(newCells);
+        grid.tick(1);
+        grid.populate(grid.getCells());
 
         //Assert
         assertEquals(expected, grid.getCells());

@@ -8,7 +8,6 @@ public interface CLI {
 
     String promptForNumIterations();
 
-    String displayCellLocationErrorAndPrompt();
+    void displayError(String message);
 
-    String displayIterationErrorAndPrompt();
 }

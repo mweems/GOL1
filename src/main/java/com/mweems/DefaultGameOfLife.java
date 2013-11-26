@@ -20,8 +20,8 @@ public class DefaultGameOfLife implements GameOfLife {
     @Override
     public void run() {
         grid.populate(getCells());
-        int numIterations = getIterations();
-        grid.populate(grid.tick(numIterations));
+        grid.tick(getIterations());
+        grid.populate(grid.getCells());
 
         displayOutput(grid.toString());
     }
@@ -32,7 +32,8 @@ public class DefaultGameOfLife implements GameOfLife {
             String cells = cli.promptForCellLocations();
             return parser.parseCellLocations(cells);
         } catch (NumberFormatException e){
-            String cells = cli.displayCellLocationErrorAndPrompt();
+            cli.displayError("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
+            String cells = cli.promptForCellLocations();
             return parser.parseCellLocations(cells);
         }
     }
@@ -43,7 +44,8 @@ public class DefaultGameOfLife implements GameOfLife {
             String iterations = cli.promptForNumIterations();
             return  parser.parseNumIterations(iterations);
         } catch (NumberFormatException e) {
-            String iterations = cli.displayIterationErrorAndPrompt();
+            cli.displayError("Only Numbers allowed for Number of Iterations");
+            String iterations = cli.promptForNumIterations();
             return parser.parseNumIterations(iterations);
         }
     }

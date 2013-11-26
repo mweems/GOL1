@@ -108,24 +108,26 @@ public class DefaultGameOfLifeTest {
     @Test
     public void getCellsHandlesIncorrectUserInputForCellLocations() {
        //Arrange
-        stub(mockCLI.promptForCellLocations()).toThrow(new NumberFormatException());
+        String errorMessage = "Only Numbers allowed as Cell Locations ie. '1,1 1,2'";
+        when(mockCLI.promptForCellLocations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
         defaultGameOfLife.getCells();
 
         //Assert
-        verify(mockCLI).displayCellLocationErrorAndPrompt();
+        verify(mockCLI).displayError(errorMessage);
     }
 
     @Test
     public void getCellsHandlesIncorrectUserInputForIterations() {
        //Arrange
-        stub(mockCLI.promptForNumIterations()).toThrow(new NumberFormatException());
+        String errorMessage = "Only Numbers allowed for Number of Iterations";
+        when(mockCLI.promptForNumIterations()).thenThrow(new NumberFormatException()).thenReturn(errorMessage);
 
         //Act
         defaultGameOfLife.getIterations();
 
         //Assert
-        verify(mockCLI).displayIterationErrorAndPrompt();
+        verify(mockCLI).displayError(errorMessage);
     }
 }

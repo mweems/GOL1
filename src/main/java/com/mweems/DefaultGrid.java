@@ -25,12 +25,12 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
-    public List<Cell> tick(int iterations) {
+    public void tick(int iterations) {
         List<Cell> nextGen = new ArrayList<Cell>();
         for(int i = 0; i < iterations; i++){
             judgeCells(nextGen);
         }
-        return nextGen;
+        this.cells = nextGen;
     }
 
     @Override
