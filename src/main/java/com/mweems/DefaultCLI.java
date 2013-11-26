@@ -11,6 +11,7 @@ public class DefaultCLI implements CLI {
 
     @Override
     public void displayOutPut(String cellLocationsAsString) {
+        if(cellLocationsAsString == "") System.out.println("No Living Cells");
         System.out.print(cellLocationsAsString);
     }
 
