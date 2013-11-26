@@ -22,10 +22,10 @@ public class DefaultCLI implements CLI {
             System.out.print("No Living Cells");
         } else {
             for(Point cellLocation : grid.getListOfCellLocations()){
-                listOfCellLocations += cellLocation.toString();
+                listOfCellLocations += String.format("%.0f,%.0f ",cellLocation.getX() ,cellLocation.getY());
             }
         }
-        System.out.print(listOfCellLocations);
+        System.out.print(listOfCellLocations.trim());
     }
 
     @Override

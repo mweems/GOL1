@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +21,7 @@ public class DefaultCLITest {
     }
 
     @Test
-    public void displayGridAsString() {
+    public void displayEmptyGridAsString() {
         //Arrange
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -55,6 +57,23 @@ public class DefaultCLITest {
 
         //Assert
         assertEquals(expectedInput, userInput);
+    }
+
+    @Test
+    public void displayGridWithTwoLiveCellsAsString(){
+        //Arrange
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        Judge judge = new DefaultJudge();
+        Grid grid = new DefaultGrid(judge);
+        List<Cell> cells = Arrays.asList(new Cell(1,2), new Cell(2,2), new Cell(3,2));
+        grid.populate(cells);
+
+        //Act
+        cli.displayOutPut(grid);
+
+        //Assert
+        assertEquals("1,2 2,2 3,2", outContent.toString());
 
     }
 
