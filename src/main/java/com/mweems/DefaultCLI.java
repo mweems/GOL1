@@ -6,7 +6,12 @@ public class DefaultCLI implements CLI {
 
     @Override
     public String promptForCellLocations() {
-      return prompt("Enter Cell Locations:");
+      return promptForInput("Enter Cell Locations:");
+    }
+
+    @Override
+    public String promptForNumIterations() {
+        return promptForInput("Enter Number of Iterations:");
     }
 
     @Override
@@ -16,16 +21,11 @@ public class DefaultCLI implements CLI {
     }
 
     @Override
-    public String promptForNumIterations() {
-        return prompt("Enter Number of Iterations:");
-    }
-
-    @Override
-    public void displayError(String message) {
+    public void displayErrorMessage(String message) {
         System.out.println(message);
     }
 
-    private String prompt(String message){
+    private String promptForInput(String message){
         Scanner userInput = new Scanner(System.in);
         System.out.print(message);
         return userInput.nextLine();

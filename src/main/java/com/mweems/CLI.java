@@ -4,10 +4,10 @@ public interface CLI {
 
     String promptForCellLocations();
 
-    void displayOutPut(String cellLocationsAsString);
-
     String promptForNumIterations();
 
-    void displayError(String message);
+    void displayOutPut(String cellLocationsAsString);
+
+    void displayErrorMessage(String message);
 
 }

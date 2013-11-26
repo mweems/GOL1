@@ -29,8 +29,8 @@ public class DefaultGrid implements Grid {
     }
 
     @Override
-    public boolean contains(Cell neighborCell) {
-        if(cells.contains(neighborCell)) return true;
+    public boolean contains(Cell cell) {
+        if(cells.contains(cell)) return true;
         return false;
     }
 
@@ -39,7 +39,7 @@ public class DefaultGrid implements Grid {
         String cellLocations = "";
         for(Cell cell : cells){
             cellLocations += cell.toString();
-            if(thisCellIsNotLastCell(cell)) cellLocations += " ";
+            if(thisCellIsNotTheLastCell(cell)) cellLocations += " ";
         }
         return cellLocations;
     }
@@ -54,17 +54,17 @@ public class DefaultGrid implements Grid {
         }
     }
 
-    private void judgeDeadCells(List<Cell> nextGen, List<Cell> neighbors) {
-        for(Cell neighborCell : neighbors){
-            List<Cell> otherNeighbors = getNeighbors(neighborCell);
-            if(judge.isAlive(neighborCell, otherNeighbors, this) && !nextGen.contains(neighborCell)){
-                neighborCell.setAlive(true);
-                nextGen.add(neighborCell);
+    private void judgeDeadCells(List<Cell> nextGen, List<Cell> cells) {
+        for(Cell cell : cells){
+            List<Cell> neighbors = getNeighbors(cell);
+            if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)){
+                cell.setAlive(true);
+                nextGen.add(cell);
             }
         }
     }
 
-    private boolean thisCellIsNotLastCell(Cell cell) {
+    private boolean thisCellIsNotTheLastCell(Cell cell) {
         return !cell.equals(cells.get(cells.size()-1));
     }
 

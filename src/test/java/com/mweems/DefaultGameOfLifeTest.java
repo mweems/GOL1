@@ -114,7 +114,7 @@ public class DefaultGameOfLifeTest {
         defaultGameOfLife.run();
 
         //Assert
-        verify(mockCLI).displayError(errorMessage);
+        verify(mockCLI).displayErrorMessage(errorMessage);
     }
 
     @Test
@@ -127,6 +127,6 @@ public class DefaultGameOfLifeTest {
         defaultGameOfLife.run();
 
         //Assert
-        verify(mockCLI).displayError(errorMessage);
+        verify(mockCLI).displayErrorMessage(errorMessage);
     }
 }

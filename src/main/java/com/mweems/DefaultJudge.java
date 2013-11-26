@@ -9,23 +9,23 @@ public class DefaultJudge implements Judge {
 
     @Override
     public boolean isAlive(Cell cell, List<Cell> neighbors, Grid grid) {
-        int liveNeighbors = 0;
+        int livingNeighbors = 0;
         for(Cell neighborCell : neighbors){
-            if(grid.contains(neighborCell)) liveNeighbors++;
+            if(grid.contains(neighborCell)) livingNeighbors++;
         }
         if(cell.isAlive()) {
-            return alive(liveNeighbors);
+            return isAlive(livingNeighbors);
         } else {
-            return dead(liveNeighbors);
+            return isDead(livingNeighbors);
         }
     }
 
-    private boolean dead(int liveNeighbors) {
-        if(liveNeighbors == MAXLIVENEIGHBORS) return true;
-        return false;
+    private boolean isDead(int liveNeighbors) {
+        if(liveNeighbors != MAXLIVENEIGHBORS) return false;
+        return true;
     }
 
-    private boolean alive(int liveNeighbors) {
+    private boolean isAlive(int liveNeighbors) {
         if(liveNeighbors < MINLIVENEIGHBORS || liveNeighbors > MAXLIVENEIGHBORS) return false;
         return true;
     }

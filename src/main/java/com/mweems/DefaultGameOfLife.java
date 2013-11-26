@@ -20,32 +20,32 @@ public class DefaultGameOfLife implements GameOfLife {
     @Override
     public void run() {
         grid.populate(getCellLocationsFromUser());
-        grid.tick(getIterationsFromUser());
+        grid.tick(getNumberOfIterationsFromUser());
         displayOutput(grid.toString());
     }
 
     private List<Cell> getCellLocationsFromUser() {
         try{
-            String cells = cli.promptForCellLocations();
-            return parser.parseCellLocations(cells);
+            String cellLocations = cli.promptForCellLocations();
+            return parser.parseCellLocations(cellLocations);
         } catch (NumberFormatException e){
-            cli.displayError("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
+            cli.displayErrorMessage("Only Numbers allowed as Cell Locations ie. '1,1 1,2'");
             return getCellLocationsFromUser();
         }
     }
 
-    private int getIterationsFromUser() {
+    private int getNumberOfIterationsFromUser() {
         try{
-            String iterations = cli.promptForNumIterations();
-            return  parser.parseNumIterations(iterations);
+            String numberOfIterations = cli.promptForNumIterations();
+            return  parser.parseNumIterations(numberOfIterations);
         } catch (NumberFormatException e) {
-            cli.displayError("Only Numbers allowed for Number of Iterations");
-            return getIterationsFromUser();
+            cli.displayErrorMessage("Only Numbers allowed for Number of Iterations");
+            return getNumberOfIterationsFromUser();
         }
     }
 
 
-    private void displayOutput(String gridAsString) {
-        cli.displayOutPut(gridAsString);
+    private void displayOutput(String locationsOfLiveCells) {
+        cli.displayOutPut(locationsOfLiveCells);
     }
 }
