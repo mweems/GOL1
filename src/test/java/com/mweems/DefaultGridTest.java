@@ -25,7 +25,7 @@ public class DefaultGridTest {
         Cell testCell = new Cell(1,2);
         DefaultGrid grid = new DefaultGrid(mockJudge);
         grid.populate(Arrays.asList(testCell));
-        stub(mockJudge.isAlive(testCell, Arrays.asList(testCell), grid)).toReturn(false);
+        stub(mockJudge.isAlive(testCell, Arrays.asList(testCell))).toReturn(false);
 
         //Act
         grid.tick(1);

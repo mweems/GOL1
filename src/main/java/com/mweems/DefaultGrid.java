@@ -49,7 +49,7 @@ public class DefaultGrid implements Grid {
     private void judgeCells() {
         for(Cell cell : cells) {
             List<Cell> neighbors = getNeighbors(cell);
-            if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)) {
+            if(judge.isAlive(cell, neighbors) && !nextGen.contains(cell)) {
                 nextGen.add(cell);
             }
             judgeDeadCells(neighbors);
@@ -59,7 +59,7 @@ public class DefaultGrid implements Grid {
     private void judgeDeadCells(List<Cell> cells) {
         for(Cell cell : cells){
             List<Cell> neighbors = getNeighbors(cell);
-            if(judge.isAlive(cell, neighbors, this) && !nextGen.contains(cell)){
+            if(judge.isAlive(cell, neighbors) && !nextGen.contains(cell)){
                 cell.setAlive(true);
                 nextGen.add(cell);
             }
@@ -78,7 +78,7 @@ public class DefaultGrid implements Grid {
         neighbors.add(new Cell(cell.getX() + 1, cell.getY() + 1));
 
         for(Cell neighborCell:neighbors){
-            neighborCell.setAlive(false);
+            if(!this.contains(neighborCell)) neighborCell.setAlive(false);
         }
         return neighbors;
     }

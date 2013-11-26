@@ -12,14 +12,12 @@ public class DefaultJudgeTest {
 
     private Cell testCell;
     private DefaultJudge judge;
-    private Grid grid;
     private List<Cell> neighbors;
 
     @Before
     public void setup() {
         testCell = new Cell(1,2);
         judge = new DefaultJudge();
-        grid = new DefaultGrid(judge);
         neighbors = new ArrayList<Cell>();
         neighbors.add(new Cell(0,1));
         neighbors.add(new Cell(0,2));
@@ -35,23 +33,23 @@ public class DefaultJudgeTest {
     public void isAliveReturnsFalseWhenCellHasLessThanTwoNeighbors() {
         //Arrange
         List<Cell> cells = Arrays.asList(testCell);
-        grid.populate(cells);
+        setLiveNeighbors(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(testCell, neighbors, grid);
+        Boolean isAlive = judge.isAlive(testCell, neighbors);
 
         //Assert
         assertFalse(isAlive);
     }
 
     @Test
-    public void isAliveReturnsTrueWhenCellHasTwoOrMoreNeighbors() {
+    public void isAliveReturnsTrueWhenCellHasTwoLiveNeighbors() {
         //Arrange
         List<Cell> cells = Arrays.asList(testCell, new Cell(2,2), new Cell(1,1));
-        grid.populate(cells);
+       setLiveNeighbors(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(testCell, neighbors, grid);
+        Boolean isAlive = judge.isAlive(testCell, neighbors);
 
         //Assert
         assertTrue(isAlive);
@@ -61,10 +59,10 @@ public class DefaultJudgeTest {
     public void isAliveReturnsFalseWhenCellHasMoreThanThreeNeighbors() {
         //Arrange
         List<Cell> cells = Arrays.asList(new Cell(0,1), new Cell(2,2), new Cell(1,1), new Cell(2,1));
-        grid.populate(cells);
+        setLiveNeighbors(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(testCell, neighbors, grid);
+        Boolean isAlive = judge.isAlive(testCell, neighbors);
 
         //Assert
         assertFalse(isAlive);
@@ -75,12 +73,18 @@ public class DefaultJudgeTest {
         //Arrange
         List<Cell> cells = Arrays.asList(new Cell(2,2), new Cell(1,1));
         testCell.setAlive(false);
-        grid.populate(cells);
+        setLiveNeighbors(cells);
 
         //Act
-        Boolean isAlive = judge.isAlive(testCell, neighbors, grid);
+        Boolean isAlive = judge.isAlive(testCell, neighbors);
 
         //Assert
         assertFalse(isAlive);
+    }
+
+    private void setLiveNeighbors(List<Cell> cells) {
+        for(Cell cell : neighbors){
+            if(!cells.contains(cell)) cell.setAlive(false);
+        }
     }
 }
